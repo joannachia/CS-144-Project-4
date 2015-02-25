@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Wooo searching!</title>
+	<title>Ebay Search</title>
 </head>
 
 
 <body>
-Keywords to search: <input type="text" name="q">
-<br>
-Number of Results to Skip: <input type="text" name="numResultsToSkip">
-<br>
-Number of Results to Return: <intput type="text" name="numResultsToReturn">
-<br>
-<button onclick="search()">Search!</button>
 
-<script>
-function search() {
-	// this is where we talk to the java app.
 
-}
-</script>
 
+	<form action="search" method="get">
+		Keywords to search: <input type="text" name="q">
+		<br>
+		Number of Results to Skip: <input type="number" name="numResultsToSkip" onkeypress="return isNumberKey(event)">
+		<br>
+		Number of Results to Return: <input type="number" name="numResultsToReturn" onkeypress="return isNumberKey(event)">
+		<br>
+		<input type ="submit" value="Search!">
+
+	</form>
+
+	
+	<script>
+		function isNumberKey(evt){
+			var charCode = (evt.which) ? evt.which : event.keyCode
+			if(charCode > 31 
+				&& (charCode < 48 || charCode > 57)){
+				return false;
+			}
+			return true;
+		}
+
+	</script>
 
 </body>
 
