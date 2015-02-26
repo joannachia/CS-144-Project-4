@@ -1,6 +1,7 @@
 package edu.ucla.cs.cs144;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +15,6 @@ public class ItemServlet extends HttpServlet implements Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String results = AuctionSearchClient.getXMLDataForItemId(request.getParameter("id"));
-
-
-
 
         request.setAttribute("itemId", results);		//string
         request.setAttribute("itemName", results);		//string
@@ -34,7 +32,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
 
 
-        RequestDispatcher requestDispatcher; 
+        RequestDispatcher requestDispatcher;
 		requestDispatcher = request.getRequestDispatcher("/itemResult.jsp");
 		requestDispatcher.forward(request, response);
 
