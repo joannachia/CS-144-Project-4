@@ -35,21 +35,50 @@
 <br><br>
 
 <b>Currently:</b> <c:out value="${currently}"/><br>
-<b>
+<b>Buy Price:</b> <c:out value="${buyPrice}"/><br>
+<b>First Bid:</b> <c:out value="${firstBid}"/><br>
+<b>Number of Bids:</b> <c:out value="${numb_bids}"/><br>
+<b>Location:</b> <c:out value="${location.getName()}"/><br>
+<b>Latitude:</b> <c:out value="${location.getLatitude()}"/><br>
+<b>Longitude:</b> <c:out value="${location.getLongitude()}"/><br>
+<b>Country:</b> <c:out value="${country}"/><br>
+<b>Starts:</b> <c:out value="${starts}"/><br>
+<b>Ends:</b> <c:out value="${ends}"/><br>
+<b>Seller Id:</b> <c:out value="${seller.getId()}"/><br>
+<b>Seller Rating:</b> <c:out value="${seller.getRating()}"/><br>
+<b>Description:</b> <c:out value="${description}"/><br>
 
 
-
-
-
-
-<c:forEach var="i" items="${searchResults}">
+<table>
 	<tr>
-		<td><c:out value="${i.getItemId()}"/></td>
-		<td><c:out value="${i.getName()}"/></td>
-	</tr>
-</c:forEach>
+		<th>User Id</th>
+		<th>Rating</th>
+		<th>Location</th>
+		<th>Latitude</th>
+		<th>Longitude</th>
+		<th>Country</th>
+		<th>Time</th>
+		<th>Amount</th>
 
+	</tr>
+	<c:forEach var="i" items="{$bids}">
+	<tr>
+		<td><c:out value="${i.getBidder().getUserId()}"/></td>
+		<td><c:out value="${i.getBidder().getRating()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getName()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getLatitude()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getLongitude()}"/></td>
+		<td><c:out value="${i.getBidder().getCountry()}"/></td>
+		<td><c:out value="${i.getTime()}"/></td>
+		<td><c:out value="${i.getAmount()}"/></td>
+	</tr>
+	</c:forEach>
 </table>
+
+
+
+
+
 
 </body>
 
