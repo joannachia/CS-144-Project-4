@@ -1,3 +1,5 @@
 /${env.CATALINA_BASE}
 /.idea
 /build
+/lib/servlet-api.jar
+CS-144-Project-4.iml
