@@ -4,13 +4,38 @@
 <html>
 <head>
 	<title>Ebay Search</title>
-
-<style>
-	table, th, td{
-	border: 1px solid black;
-
-	}
-</style>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map-canvas {
+            width: 400px;
+            height: 400px;
+            margin: 0;
+            padding: 0;
+            float: right;
+        }
+    </style>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAdZLtQ08dr2cH8qD3-dPlaMLtu3hKhMTo">
+    </script>
+    <script type="text/javascript">
+        function initialize() {
+            var lat = ${item.getLocation().getLatitude()};
+            var lng = ${item.getLocation().getLongitude()};
+            var latlng = new google.maps.LatLng(lat, lng);
+            var mapOptions = {
+                zoom: 14, // default is 8
+                center: latlng
+            };
+            var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head>
 
 <body>
@@ -22,6 +47,7 @@
 
 <hr>
 
+<div id="map-canvas"></div>
 
 <b>Item Id:</b> <c:out value="${item.getId()}"/><br>
 <b>Item Name:</b> <c:out value="${item.getName()}"/><br>
