@@ -57,6 +57,38 @@
 
 
 
+<table>
+	<tr>
+		<th>User Id</th>
+		<th>Rating</th>
+		<th>Location</th>
+		<th>Latitude</th>
+		<th>Longitude</th>
+		<th>Country</th>
+		<th>Time</th>
+		<th>Amount</th>
+
+	</tr>
+	<c:forEach var="i" items="${item.getBids()}">
+	<tr>
+		<td><c:out value="${i.getBidder().getId()}"/></td>
+		<td><c:out value="${i.getBidder().getRating()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getName()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getLatitude()}"/></td>
+		<td><c:out value="${i.getBidder().getLocation().getLongitude()}"/></td>
+		<td><c:out value="${i.getBidder().getCountry()}"/></td>
+		<td><c:out value="${i.getTime()}"/></td>
+		<td><c:out value="${i.getAmount()}"/></td>
+	</tr>
+	</c:forEach>
+</table>
+
+
+
+
+
+
+
 </body>
 
 </html>

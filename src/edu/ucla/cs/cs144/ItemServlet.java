@@ -172,12 +172,20 @@ public class ItemServlet extends HttpServlet implements Servlet {
                 if (bidderLocationElement != null) {
                     Location bidderLocation = new Location();
                     bidderLocation.setName(getElementText(bidderLocationElement));
-                    bidderLocation.setLatitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Latitude")));
-                    bidderLocation.setLongitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Longitude")));
+                    
+                    if(getAttributeValue(bidderLocationElement, "Latitude")!=null){
+                        bidderLocation.setLatitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Latitude")));
+                    }
+                    
+                    if(getAttributeValue(bidderLocationElement, "Longitude")!=null){
+                       bidderLocation.setLongitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Longitude")));
+                    }
                     bidder.setLocation(bidderLocation);
                 }
 
-                bidder.setCountry(getElementTextByTagNameNR(bidderElement, "Country"));
+                if(getElementTextByTagNameNR(bidderElement, "Country")!=null){
+                    bidder.setCountry(getElementTextByTagNameNR(bidderElement, "Country"));
+                }   
                 bid.setBidder(bidder);
                 bid.setTime(createDate(getElementTextByTagNameNR(bidderElement, "Time")));
                 bid.setAmount(Double.parseDouble(strip(getElementTextByTagNameNR(bidderElement, "Amount"))));
@@ -188,8 +196,13 @@ public class ItemServlet extends HttpServlet implements Servlet {
             Element locationElement = getElementByTagNameNR(itemElement, "Location");
             Location location = new Location();
             location.setName(getElementText(locationElement));
-            location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Latitude")));
-            location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Longitude")));
+            
+            if(getAttributeValue(locationElement, "Latitude")!= null){
+                location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Latitude")));
+            }
+            if(getAttributeValue(locationElement, "Longitude")!=null){
+                location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Longitude")));
+            }
             item.setLocation(location);
             item.setCountry(getElementTextByTagNameNR(itemElement, "Country"));
             item.setStarted(createDate(getElementTextByTagNameNR(itemElement, "Started")));
