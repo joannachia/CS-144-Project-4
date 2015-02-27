@@ -23,6 +23,9 @@ public class SearchServlet extends HttpServlet implements Servlet {
     		Integer.parseInt(request.getParameter("numResultsToReturn")));
 
     	request.setAttribute("searchResults", results);
+        request.setAttribute("q", request.getParameter("q"));
+        request.setAttribute("numResultsToSkip", Integer.parseInt(request.getParameter("numResultsToSkip")));
+        request.setAttribute("numResultsToReturn", Integer.parseInt(request.getParameter("numResultsToSkip")));
 
      //    PrintWriter printWriter = response.getWriter();
      //    printWriter.print("<!doctype html><html><body>");

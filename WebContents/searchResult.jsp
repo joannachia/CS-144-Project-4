@@ -17,35 +17,46 @@
 
 <body>
 
-<a href="">Back</a> || <a href="">Next</a>
-<hr>
 
 
 <form action="search" method="get">
 	Keywords to search: <input type="text" name="q">
 	<br>
-	Number of Results to Skip: <input type="number" name="numResultsToSkip" onkeypress="return isNumberKey(event)">
-	<br>
-	Number of Results to Return: <input type="number" name="numResultsToReturn" onkeypress="return isNumberKey(event)">
-	<br>
+	<input type="hidden" name="numResultsToSkip" value="0" />
+	<input type="hidden" name="numResultsToReturn" value="20" />
 	<input type ="submit" value="Search!">
 </form>
 
 	
+
+
+<hr>
+
+
+
+<p id="previous">Previous</p>
+<p id="next">Next</p>
+
+
+
 <script>
-	function isNumberKey(evt){
-		var charCode = (evt.which) ? evt.which : event.keyCode
-		if(charCode > 31 
-			&& (charCode < 48 || charCode > 57)){
-			return false;
-		}
-		return true;
-	}
+var q = '${q}';
+var numResultsToSkip = ${numResultsToSkip};
+var numResultsToReturn = '20';
+var n_numResultsToSkip = numResultsToSkip + 20;
+	
+
+document.getElementById("next").innerHTML = '<a href="search?q=' + q + '&numResultsToSkip=' + n_numResultsToSkip.toString() + '&numResultsToReturn=' + numResultsToReturn + '">Next</a>';
+
+
+if (numResultsToSkip >= 20){
+	var b_numResultsToSkip = numResultsToSkip - 20;
+	document.getElementById("previous").innerHTML = '<a href="search?q=' + q + '&numResultsToSkip=' + b_numResultsToSkip.toString() + '&numResultsToReturn=' + numResultsToReturn + '">Previous</a>';
+}
+
+
 </script>
 
-
-
-<br>....................................<br>
 
 <table>
 	<tr>

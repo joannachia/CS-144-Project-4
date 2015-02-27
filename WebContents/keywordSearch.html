@@ -12,26 +12,13 @@
 	<form action="search" method="get">
 		Keywords to search: <input type="text" name="q">
 		<br>
-		Number of Results to Skip: <input type="number" name="numResultsToSkip" onkeypress="return isNumberKey(event)">
-		<br>
-		Number of Results to Return: <input type="number" name="numResultsToReturn" onkeypress="return isNumberKey(event)">
-		<br>
+		<input type="hidden" name="numResultsToSkip" value="0" />
+		<input type="hidden" name="numResultsToReturn" value="20" />
 		<input type ="submit" value="Search!">
 
 	</form>
 
 	
-	<script>
-		function isNumberKey(evt){
-			var charCode = (evt.which) ? evt.which : event.keyCode
-			if(charCode > 31 
-				&& (charCode < 48 || charCode > 57)){
-				return false;
-			}
-			return true;
-		}
-
-	</script>
 
 </body>
 
