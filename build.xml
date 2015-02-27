@@ -7,7 +7,7 @@
     <property name="war-name" value="eBay" />
     <property environment="env"/>
     <path id="classpath">
-        <fileset dir="${lib-dir}" includes="**/*.jar" />
+        <fileset dir="${lib-dir}" includes="**/*.jar" excludes="servlet-api.jar" />
         <fileset dir="${env.CATALINA_HOME}/lib" includes="**/*.jar" />
         <fileset dir="${env.AXIS2_HOME}/lib" includes="**/*.jar" />
         <pathelement location="${obj-dir}"/>

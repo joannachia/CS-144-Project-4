@@ -1,17 +1,20 @@
 package edu.ucla.cs.cs144;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by kevin on 2/25/15.
  */
 public class Item {
+    private int id;
     private String name;
-    private String[] categories;
+    private ArrayList<String> categories;
     private double currently;
     private double buyPrice;
+    private double firstBid;
     private int numberOfBids;
-    private Bid[] bids;
+    private ArrayList<Bid> bids;
     private Location location;
     private String country;
     private Date started;
@@ -25,14 +28,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String[] getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String[] categories) {
-        this.categories = categories;
     }
 
     public double getCurrently() {
@@ -57,14 +52,6 @@ public class Item {
 
     public void setNumberOfBids(int numberOfBids) {
         this.numberOfBids = numberOfBids;
-    }
-
-    public Bid[] getBids() {
-        return bids;
-    }
-
-    public void setBids(Bid[] bids) {
-        this.bids = bids;
     }
 
     public Location getLocation() {
@@ -113,5 +100,37 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<String> categories) {
+        this.categories = categories;
+    }
+
+    public ArrayList<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(ArrayList<Bid> bids) {
+        this.bids = bids;
+    }
+
+    public double getFirstBid() {
+        return firstBid;
+    }
+
+    public void setFirstBid(double firstBid) {
+        this.firstBid = firstBid;
     }
 }
