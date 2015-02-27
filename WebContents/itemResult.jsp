@@ -20,7 +20,7 @@
     <input type="submit" value="Search">
 </form>
 
-<br>....................................<br>
+<hr>
 
 
 <b>Item Id:</b> <c:out value="${item.getId()}"/><br>
@@ -32,7 +32,7 @@
 		<th> Categories</th>
 	</tr>
 
-	<c:forEach var="i" items="{$item.getCategories()}">
+	<c:forEach var="i" items="${item.getCategories()}">
 	<tr>
 		<td><c:out value="${i}"/></td>
 	</tr>

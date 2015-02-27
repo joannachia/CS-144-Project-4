@@ -1,6 +1,5 @@
 package edu.ucla.cs.cs144;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,12 +8,12 @@ import java.util.Date;
 public class Item {
     private int id;
     private String name;
-    private ArrayList<String> categories;
+    private String[] categories;
     private double currently;
     private double buyPrice;
     private double firstBid;
     private int numberOfBids;
-    private ArrayList<Bid> bids;
+    private Bid[] bids;
     private Location location;
     private String country;
     private Date started;
@@ -110,27 +109,27 @@ public class Item {
         this.id = id;
     }
 
-    public ArrayList<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-
-    public ArrayList<Bid> getBids() {
-        return bids;
-    }
-
-    public void setBids(ArrayList<Bid> bids) {
-        this.bids = bids;
-    }
-
     public double getFirstBid() {
         return firstBid;
     }
 
     public void setFirstBid(double firstBid) {
         this.firstBid = firstBid;
+    }
+
+    public String[] getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String[] categories) {
+        this.categories = categories;
+    }
+
+    public Bid[] getBids() {
+        return bids;
+    }
+
+    public void setBids(Bid[] bids) {
+        this.bids = bids;
     }
 }

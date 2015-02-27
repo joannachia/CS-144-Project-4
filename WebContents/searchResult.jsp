@@ -18,7 +18,7 @@
 <body>
 
 <a href="">Back</a> || <a href="">Next</a>
-<br>....................................<br>
+<hr>
 
 
 <form action="search" method="get">

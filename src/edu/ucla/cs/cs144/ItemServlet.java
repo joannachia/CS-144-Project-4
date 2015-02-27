@@ -145,9 +145,9 @@ public class ItemServlet extends HttpServlet implements Servlet {
             item.setName(getElementTextByTagNameNR(itemElement, "Name"));
 
             Element[] categoryElements = getElementsByTagNameNR(itemElement, "Category");
-            ArrayList<String> categories = new ArrayList<String>();
-            for (Element categoryElement : categoryElements) {
-                categories.add(getElementText(categoryElement));
+            String[] categories = new String[categoryElements.length];
+            for (int i = 0; i < categoryElements.length; i++) {
+                categories[i] = getElementText(categoryElements[i]);
             }
             item.setCategories(categories);
 
@@ -160,11 +160,11 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
             Element bidsElement = getElementByTagNameNR(itemElement, "Bids");
             Element[] bidElements = getElementsByTagNameNR(bidsElement, "Bids");
-            ArrayList<Bid> bids = new ArrayList<Bid>();
-            for (Element bidElement : bidElements) {
+            Bid[] bids = new Bid[bidElements.length];
+            for (int i = 0; i < bidElements.length; i++) {
                 Bid bid = new Bid();
                 User bidder = new User();
-                Element bidderElement = getElementByTagNameNR(bidElement, "Bidder");
+                Element bidderElement = getElementByTagNameNR(bidElements[i], "Bidder");
                 bidder.setId(getAttributeValue(bidderElement, "UserID"));
                 bidder.setRating(Integer.parseInt(getAttributeValue(bidderElement, "Rating")));
 
@@ -181,7 +181,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
                 bid.setBidder(bidder);
                 bid.setTime(createDate(getElementTextByTagNameNR(bidderElement, "Time")));
                 bid.setAmount(Double.parseDouble(strip(getElementTextByTagNameNR(bidderElement, "Amount"))));
-                bids.add(bid);
+                bids[i] = bid;
             }
             item.setBids(bids);
 
