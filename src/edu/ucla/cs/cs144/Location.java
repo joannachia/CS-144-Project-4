@@ -6,6 +6,7 @@ package edu.ucla.cs.cs144;
 public class Location {
     private double latitude;
     private double longitude;
+    private String name;
 
     public double getLatitude() {
         return latitude;
@@ -21,5 +22,13 @@ public class Location {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

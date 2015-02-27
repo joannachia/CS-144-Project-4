@@ -133,7 +133,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
         Item item = new Item();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
-        PrintWriter writer = response.getWriter();
+        // PrintWriter writer = response.getWriter();
         try {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             InputSource is = new InputSource(new StringReader(itemXML));
@@ -171,6 +171,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
                 Element bidderLocationElement = getElementByTagNameNR(bidderElement, "Location");
                 if (bidderLocationElement != null) {
                     Location bidderLocation = new Location();
+                    bidderLocation.setName(getElementText(bidderLocationElement));
                     bidderLocation.setLatitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Latitude")));
                     bidderLocation.setLongitude(Double.parseDouble(getAttributeValue(bidderLocationElement, "Longitude")));
                     bidder.setLocation(bidderLocation);
@@ -186,6 +187,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
             Element locationElement = getElementByTagNameNR(itemElement, "Location");
             Location location = new Location();
+            location.setName(getElementText(locationElement));
             location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Latitude")));
             location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Longitude")));
             item.setLocation(location);
@@ -202,17 +204,17 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
             request.setAttribute("item", item);
 
-            writer.println(item.toString());
+            // writer.println(item.toString());
         } catch (ParserConfigurationException pce) {
-            writer.println("unable to create a document builder");
+            // writer.println("unable to create a document builder");
         } catch (SAXException sae) {
-            writer.println("error parsing xml");
+            // writer.println("error parsing xml");
         }
-        writer.close();
+        // writer.close();
 
-//        RequestDispatcher requestDispatcher;
-//		requestDispatcher = request.getRequestDispatcher("/itemResult.jsp");
-//		requestDispatcher.forward(request, response);
+       RequestDispatcher requestDispatcher;
+		requestDispatcher = request.getRequestDispatcher("/itemResult.jsp");
+		requestDispatcher.forward(request, response);
 
     }
 }
