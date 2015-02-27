@@ -24,6 +24,6 @@
         <url-pattern>/suggest</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>keywordSearch.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

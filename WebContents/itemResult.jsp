@@ -15,6 +15,13 @@
 
 <body>
 
+<form action="item" method="get">
+    Item Id: <input type="number" name="id">
+    <input type="submit" value="Search">
+</form>
+
+<br>....................................<br>
+
 
 <b>Item Id:</b> <c:out value="${itemId}"/><br>
 <b>Item Name:</b> <c:out value="${itemName}"/><br>
