@@ -133,7 +133,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
         Item item = new Item();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
-        // PrintWriter writer = response.getWriter();
+//        PrintWriter writer = response.getWriter();
         try {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             InputSource is = new InputSource(new StringReader(itemXML));
@@ -159,7 +159,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
             item.setNumberOfBids(Integer.parseInt(getElementTextByTagNameNR(itemElement, "Number_of_Bids")));
 
             Element bidsElement = getElementByTagNameNR(itemElement, "Bids");
-            Element[] bidElements = getElementsByTagNameNR(bidsElement, "Bids");
+            Element[] bidElements = getElementsByTagNameNR(bidsElement, "Bid");
             Bid[] bids = new Bid[bidElements.length];
             for (int i = 0; i < bidElements.length; i++) {
                 Bid bid = new Bid();
@@ -185,10 +185,12 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
                 if(getElementTextByTagNameNR(bidderElement, "Country")!=null){
                     bidder.setCountry(getElementTextByTagNameNR(bidderElement, "Country"));
-                }   
+                }
+
                 bid.setBidder(bidder);
-                bid.setTime(createDate(getElementTextByTagNameNR(bidderElement, "Time")));
-                bid.setAmount(Double.parseDouble(strip(getElementTextByTagNameNR(bidderElement, "Amount"))));
+
+                bid.setTime(createDate(getElementTextByTagNameNR(bidElements[i], "Time")));
+                bid.setAmount(Double.parseDouble(strip(getElementTextByTagNameNR(bidElements[i], "Amount"))));
                 bids[i] = bid;
             }
             item.setBids(bids);
@@ -201,7 +203,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
                 location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Latitude")));
             }
             if(getAttributeValue(locationElement, "Longitude")!=null){
-                location.setLatitude(Double.parseDouble(getAttributeValue(locationElement, "Longitude")));
+                location.setLongitude(Double.parseDouble(getAttributeValue(locationElement, "Longitude")));
             }
             item.setLocation(location);
             item.setCountry(getElementTextByTagNameNR(itemElement, "Country"));
@@ -216,14 +218,20 @@ public class ItemServlet extends HttpServlet implements Servlet {
             item.setDescription(getElementTextByTagNameNR(itemElement, "Description"));
 
             request.setAttribute("item", item);
-
-            // writer.println(item.toString());
+//
+//            writer.println("num bid elements: " + bidElements.length);
+//            writer.println("actual num bids: " + item.getNumberOfBids());
+//            for (Bid bid : item.getBids()) {
+//                writer.println("bidder: " + bid.getBidder());
+//                writer.println("time: " + bid.getTime());
+//                writer.println("amount: " + bid.getAmount());
+//            }
         } catch (ParserConfigurationException pce) {
             // writer.println("unable to create a document builder");
         } catch (SAXException sae) {
             // writer.println("error parsing xml");
         }
-        // writer.close();
+//        writer.close();
 
        RequestDispatcher requestDispatcher;
 		requestDispatcher = request.getRequestDispatcher("/itemResult.jsp");
