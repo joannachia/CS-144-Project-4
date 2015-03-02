@@ -4,13 +4,14 @@
 <html>
 <head>
 	<title>Ebay Search</title>
-
-<style>
-	table, th, td{
-	border: 1px solid black;
-
-	}
-</style>
+    <link rel="stylesheet" type="text/css" href="autoSuggest.css">
+    <script type="text/javascript" src="autoSuggest.js"></script>
+    <script type="text/javascript" src="suggestions.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oTextbox = new AutoSuggestControl(document.getElementById("query"), new Suggestions());
+        }
+    </script>
 </head>
 
 
@@ -19,8 +20,8 @@
 
 
 
-<form action="search" method="get">
-	Keywords to search: <input type="text" name="q">
+<form action="search" method="get" autocomplete="off">
+	Keywords to search: <input type="text" name="q" id="query">
 	<br>
 	<input type="hidden" name="numResultsToSkip" value="0" />
 	<input type="hidden" name="numResultsToReturn" value="20" />

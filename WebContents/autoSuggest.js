@@ -1,8 +1,4 @@
 /**
- * Created by kevin on 3/1/15.
- */
-
-/**
  * An autosuggest textbox control.
  * @class
  * @scope public
