@@ -19,30 +19,22 @@ public class ProxyServlet extends HttpServlet implements Servlet {
     {
         PrintWriter writer = response.getWriter();
 
-        try {
-            writer.print("before");
-	        String forwardURLString="http://google.com/complete/search?output=toolbar&q=" + request.getParameter("q");
-	        URL forwardURL = new URL(forwardURLString);
-	        HttpURLConnection forwardConnection = (HttpURLConnection) forwardURL.openConnection();
-            writer.print("after");
+        String forwardURLString="http://google.com/complete/search?output=toolbar&q=" + request.getParameter("q");
+        URL forwardURL = new URL(forwardURLString);
+        HttpURLConnection forwardConnection = (HttpURLConnection) forwardURL.openConnection();
 
-	        for (String key : forwardConnection.getHeaderFields().keySet()) {
-	        	response.setHeader(key, forwardConnection.getHeaderField(key));
-	        }
+        response.setContentType("text/xml");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(forwardConnection.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(forwardConnection.getInputStream()));
 
-            String responseString = "testing";
-            String line;
-            while ((line = reader.readLine()) != null) {
-                responseString += line;
-            }
-            reader.close();
+        String responseString = "";
+        String line;
+        while ((line = reader.readLine()) != null) {
+            responseString += line;
+        }
+        reader.close();
 
-            writer.print(responseString);
-		} catch (Exception e){
-            writer.print("exception");
-		}
+        writer.print(responseString);
         writer.close();
 
     }
