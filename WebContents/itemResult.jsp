@@ -25,15 +25,45 @@
     </script>
     <script type="text/javascript">
         function initialize() {
-            var lat = ${item.getLocation().getLatitude()};
-            var lng = ${item.getLocation().getLongitude()};
-            var latlng = new google.maps.LatLng(lat, lng);
-            var mapOptions = {
-                zoom: 14, // default is 8
-                center: latlng
-            };
-            var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            var lat = parseFloat("${item.getLocation().getLatitude()}"),
+                lng = parseFloat("${item.getLocation().getLongitude()}"),
+                locationName = "${item.getLocation().getName()}",
+                mapOptions = {
+                    zoom: 14
+                },
+                map,
+                mapCanvas = document.getElementById("map-canvas");
+            if (!isNaN(lat) && !isNaN(lng)) {
+                mapOptions.center = new google.maps.LatLng(lat, lng);
+                map = new google.maps.Map(mapCanvas, mapOptions);
+            } else if (locationName !== "") {
+                codeAddress(locationName, function(location) {
+                    console.log(location.lat(), location.lng());
+                    mapOptions.center = location;
+                    map = new google.maps.Map(mapCanvas, mapOptions);
+                }, function() {
+                    hideElement(mapCanvas);
+                })
+            } else {
+                hideElement(mapCanvas);
+            }
         }
+
+        function hideElement(element) {
+            element.style.display = "none";
+        }
+
+        function codeAddress(address, successCallback, failureCallback) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    successCallback(results[0].geometry.location);
+                } else {
+                    failureCallback();
+                }
+            });
+        }
+
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>

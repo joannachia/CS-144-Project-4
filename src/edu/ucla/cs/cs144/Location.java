@@ -4,23 +4,23 @@ package edu.ucla.cs.cs144;
  * Created by kevin on 2/25/15.
  */
 public class Location {
-    private double latitude;
-    private double longitude;
-    private String name;
+    private Double latitude = null;
+    private Double longitude = null;
+    private String name = null;
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
