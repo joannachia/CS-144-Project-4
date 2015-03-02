@@ -133,6 +133,9 @@ public class ItemServlet extends HttpServlet implements Servlet {
         Item item = new Item();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
+        request.setAttribute("id", request.getParameter("id"));
+
+
 //        PrintWriter writer = response.getWriter();
         try {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

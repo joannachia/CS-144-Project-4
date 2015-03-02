@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -45,10 +46,11 @@ var q = '${q}';
 var numResultsToSkip = ${numResultsToSkip};
 var numResultsToReturn = '20';
 var n_numResultsToSkip = numResultsToSkip + 20;
+var numResults = parseInt("${fn:length(searchResults)}");
 	
-
-document.getElementById("next").innerHTML = '<a href="search?q=' + q + '&numResultsToSkip=' + n_numResultsToSkip.toString() + '&numResultsToReturn=' + numResultsToReturn + '">Next</a>';
-
+if (numResults == 20) {
+    document.getElementById("next").innerHTML = '<a href="search?q=' + q + '&numResultsToSkip=' + n_numResultsToSkip.toString() + '&numResultsToReturn=' + numResultsToReturn + '">Next</a>';
+}
 
 if (numResultsToSkip >= 20){
 	var b_numResultsToSkip = numResultsToSkip - 20;
@@ -58,21 +60,28 @@ if (numResultsToSkip >= 20){
 
 </script>
 
+<c:choose>
+    <c:when test="${empty searchResults}">
+        <p>No results matching query: "${q}"</p>
+    </c:when>
+    <c:otherwise>
+        <table>
+            <tr>
+                <th>Item Id</th>
+                <th>Name</th>
+            </tr>
 
-<table>
-	<tr>
-		<th>Item Id</th>
-		<th>Name</th>
-	</tr>
-	
-<c:forEach var="i" items="${searchResults}">
-	<tr>
-		<td><a href="item?id=${i.getItemId()}"><c:out value="${i.getItemId()}"/></a></td>
-		<td><c:out value="${i.getName()}"/></td>
-	</tr>
-</c:forEach>
+            <c:forEach var="i" items="${searchResults}">
+                <tr>
+                    <td><a href="item?id=${i.getItemId()}"><c:out value="${i.getItemId()}"/></a></td>
+                    <td><c:out value="${i.getName()}"/></td>
+                </tr>
+            </c:forEach>
 
-</table>
+        </table>
+    </c:otherwise>
+</c:choose>
+
 
 </body>
 
