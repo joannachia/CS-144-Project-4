@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  */
 public class ConfirmationServlet extends HttpServlet implements Servlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
 //        HttpSession session = request.getSession();
