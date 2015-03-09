@@ -29,7 +29,7 @@ public class ConfirmationServlet extends HttpServlet implements Servlet {
         request.setAttribute("creditCardNumber", creditCardNumber);
 
         RequestDispatcher requestDispatcher;
-        requestDispatcher = request.getRequestDispatcher("/confirmation.jsp");
+        requestDispatcher = request.getRequestDispatcher("/cardConfirmation.jsp");
         requestDispatcher.forward(request, response);
         
         // PrintWriter writer = response.getWriter();

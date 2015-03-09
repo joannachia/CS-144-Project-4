@@ -20,23 +20,20 @@
 	    	<b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
 
 			<c:choose>
-				<c:when test="">
-					<b>Credit Card:</b> <c:out value="${creditCardNumber}"><br>
-					<b>Time:</b> <c:out value="${time}"><br>
+				<c:when test="${not empty creditCardNumber}">
+					<b>Credit Card:</b> <c:out value="${creditCardNumber}"/><br>
+					<b>Time:</b> <c:out value="${time}"/><br>
 				</c:when>
 				<c:otherwise>
 					This product was not purchased<br>
 				</c:otherwise>
 			</c:choose>
-	    	
+
 		</c:when>
 		<c:otherwise>
 			<b>Buy Price:</b> Not available for purchase<br>
 		</c:otherwise>
 	</c:choose>
-
-
-
 
 </body>
 </html>
