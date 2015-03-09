@@ -16,7 +16,7 @@
     <c:choose>
 	    <c:when test="${not empty item.getBuyPrice()}">
 	    	<b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
-		    <form action="confirmation" method="post">
+		    <form action="${confirmationUrl}" method="post">
 		    	<b>Credit Card:</b> <input type="text" name="creditCardNumber">
 		        <input type="submit" value="Submit"><br><br>
 		    </form>
