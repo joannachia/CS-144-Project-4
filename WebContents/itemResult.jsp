@@ -107,8 +107,8 @@
         <br><br>
 
         <b>Currently:</b> <fmt:formatNumber value="${item.getCurrently()}" type="currency" /><br>
-        <b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
         <c:if test="${not empty item.getBuyPrice()}">
+            <b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
             <form action="creditCardInput">
                 <input type="submit" value="Pay Now"><br><br>
             </form>
