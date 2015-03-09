@@ -19,23 +19,18 @@ public class CreditCardServlet extends HttpServlet implements Servlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
+        Item item = (Item) session.getAttribute("item");
+        request.setAttribute("confirmationUrl", "https://" + request.getServerName() + ":8443/eBay/confirmation");
+        request.setAttribute("item",item);
+        RequestDispatcher requestDispatcher;
+        requestDispatcher = request.getRequestDispatcher("/creditCardInfo.jsp");
+        requestDispatcher.forward(request, response);
 
-
-       Item item = (Item) session.getAttribute("item");
-       RequestDispatcher requestDispatcher;
-       requestDispatcher = request.getRequestDispatcher("/creditCardInfo.jsp");
-       request.setAttribute("item",item);
-       requestDispatcher.forward(request, response);
-
-
-
-
-              // PrintWriter writer = response.getWriter();
-              // writer.println(session.getId());
-              // writer.println(item.getName());
-              // writer.close();
+//        PrintWriter writer = response.getWriter();
+//        writer.println("https://" + request.getServerName() + ":8443/eBay/confirmation");
+//        writer.close();
 
     }
 }
