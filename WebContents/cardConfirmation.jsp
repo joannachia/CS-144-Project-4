@@ -14,18 +14,28 @@
 	    <b>Item Name:</b> <c:out value="${item.getName()}"/><br>
 	</c:if>
 
+
     <c:choose>
 	    <c:when test="${not empty item.getBuyPrice()}">
 	    	<b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
-		    <form action="confirmation" method="post">
-		    	<b>Credit Card:</b> <input type="text" name="creditCardNumber">
-		        <input type="submit" value="Submit"><br><br>
-		    </form>
+
+			<c:choose>
+				<c:when test="">
+					<b>Credit Card:</b> <c:out value="${creditCardNumber}"><br>
+					<b>Time:</b> <c:out value="${time}"><br>
+				</c:when>
+				<c:otherwise>
+					This product was not purchased<br>
+				</c:otherwise>
+			</c:choose>
+	    	
 		</c:when>
 		<c:otherwise>
-			Not available for purchase
+			<b>Buy Price:</b> Not available for purchase<br>
 		</c:otherwise>
 	</c:choose>
+
+
 
 
 </body>
