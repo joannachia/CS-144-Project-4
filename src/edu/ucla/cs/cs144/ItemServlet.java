@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -129,6 +130,7 @@ public class ItemServlet extends HttpServlet implements Servlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        HttpSession session = request.getSession(true);
         String itemXML = AuctionSearchClient.getXMLDataForItemId(request.getParameter("id"));
         Item item = new Item();
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -221,6 +223,10 @@ public class ItemServlet extends HttpServlet implements Servlet {
             item.setDescription(getElementTextByTagNameNR(itemElement, "Description"));
 
             request.setAttribute("item", item);
+
+            if (item.getBuyPrice() != null) {
+                session.setAttribute("item", item);
+            }
 //
 //            writer.println("num bid elements: " + bidElements.length);
 //            writer.println("actual num bids: " + item.getNumberOfBids());

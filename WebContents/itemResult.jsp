@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -104,9 +106,14 @@
 
         <br><br>
 
-        <b>Currently:</b> <c:out value="${item.getCurrently()}"/><br>
-        <b>Buy Price:</b> <c:out value="${item.getBuyPrice()}"/><br>
-        <b>First Bid:</b> <c:out value="${item.getFirstBid()}"/><br>
+        <b>Currently:</b> <fmt:formatNumber value="${item.getCurrently()}" type="currency" /><br>
+        <b>Buy Price:</b> <fmt:formatNumber value="${item.getBuyPrice()}" type="currency" /><br>
+        <c:if test="${not empty item.getBuyPrice()}">
+            <form action="creditCardInput">
+                <input type="submit" value="Pay Now"><br><br>
+            </form>
+        </c:if>
+        <b>First Bid:</b> <fmt:formatNumber value="${item.getFirstBid()}" type="currency" /><br>
         <b>Number of Bids:</b> <c:out value="${item.getNumberOfBids()}"/><br>
         <b>Location:</b> <c:out value="${item.getLocation().getName()}"/><br>
         <b>Latitude:</b> <c:out value="${item.getLocation().getLatitude()}"/><br>
@@ -115,36 +122,37 @@
         <b>Starts:</b> <c:out value="${item.getStarted()}"/><br>
         <b>Ends:</b> <c:out value="${item.getEnds()}"/><br>
         <b>Seller Id:</b> <c:out value="${item.getSeller().getId()}"/><br>
-        <b>Seller Rating:</b> <c:out value="${item.getSeller().getRating()}"/><br>
+        <b>Seller Rating:</b> <fmt:formatNumber type="number" value="${item.getSeller().getRating()}" /><br>
         <b>Description:</b> <c:out value="${item.getDescription()}"/><br>
 
 
+        <c:if test="${fn:length(item.getBids()) > 0}">
+            <table>
+                <tr>
+                    <th>User Id</th>
+                    <th>Rating</th>
+                    <th>Location</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Country</th>
+                    <th>Time</th>
+                    <th>Amount</th>
 
-        <table>
-            <tr>
-                <th>User Id</th>
-                <th>Rating</th>
-                <th>Location</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Country</th>
-                <th>Time</th>
-                <th>Amount</th>
-
-            </tr>
-            <c:forEach var="i" items="${item.getBids()}">
-            <tr>
-                <td><c:out value="${i.getBidder().getId()}"/></td>
-                <td><c:out value="${i.getBidder().getRating()}"/></td>
-                <td><c:out value="${i.getBidder().getLocation().getName()}"/></td>
-                <td><c:out value="${i.getBidder().getLocation().getLatitude()}"/></td>
-                <td><c:out value="${i.getBidder().getLocation().getLongitude()}"/></td>
-                <td><c:out value="${i.getBidder().getCountry()}"/></td>
-                <td><c:out value="${i.getTime()}"/></td>
-                <td><c:out value="${i.getAmount()}"/></td>
-            </tr>
-            </c:forEach>
-        </table>
+                </tr>
+                <c:forEach var="i" items="${item.getBids()}">
+                <tr>
+                    <td><c:out value="${i.getBidder().getId()}"/></td>
+                    <td><fmt:formatNumber value="${i.getBidder().getRating()}" type="number"/></td>
+                    <td><c:out value="${i.getBidder().getLocation().getName()}"/></td>
+                    <td><c:out value="${i.getBidder().getLocation().getLatitude()}"/></td>
+                    <td><c:out value="${i.getBidder().getLocation().getLongitude()}"/></td>
+                    <td><c:out value="${i.getBidder().getCountry()}"/></td>
+                    <td><c:out value="${i.getTime()}"/></td>
+                    <td><fmt:formatNumber value="${i.getAmount()}" type="currency" /></td>
+                </tr>
+                </c:forEach>
+            </table>
+        </c:if>
     </c:otherwise>
 </c:choose>
 

@@ -10,7 +10,7 @@ public class Item {
     private String name;
     private String[] categories;
     private double currently;
-    private double buyPrice;
+    private Double buyPrice;
     private double firstBid;
     private int numberOfBids;
     private Bid[] bids;
@@ -37,11 +37,11 @@ public class Item {
         this.currently = currently;
     }
 
-    public double getBuyPrice() {
+    public Double getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(double buyPrice) {
+    public void setBuyPrice(Double buyPrice) {
         this.buyPrice = buyPrice;
     }
 
